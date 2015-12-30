@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>轮播图片库</title>
+	<style type="text/css">
+	*{margin:0;padding:0;}
+	ul,li{list-style:none;}
+	.color-red{color:red;}
+	.bg-red{background-color:red;}
+	.cycle{
+		position:relative;
+		z-inde:1;
+		width:350px;
+		height:350px;
+		margin:50px auto;
+		border:1px solid #ddd;
+		overflow:hidden;
+	}
+	.cycle ul{
+		width:10000px;
+		height:350px;
+		overflow:hidden;
+	}
+	.cycle ul:after{
+		content:"";
+		display:block;
+		clear:both;
+	}
+	.cycle ul > li{
+		position: absolute;
+		top:0;
+		left:-350px;
+		z-index:1;
+		float:left;
+		height:350px;
+		width:350px;
+		box-sizing:border-box;
+	}
+	.cycle ul > li.current{
+		left:0;
+		z-index:2;
+	}
+	.cycle ul > li > img{
+		width:350px;
+		height:350px;
+	}
+	.gallery-pager{
+		position:absolute;
+		left:50%;
+		bottom:10px;
+		z-index:9;
+		/*width:100%;*/
+		text-align:center;
+	}
+	.gallery-pager > span{
+		display:inline-block;
+		width:20px;
+		height:20px;
+		line-height:20px;
+		margin:0 5px;
+		border-radius:50%;
+		background-color:#000;
+		color:#fff;
+		cursor:pointer;
+		opacity:0.6;
+	}
+	.gallery-pager > span.current{
+		opacity:1;
+	}
+	.cycle > .prev-btn,
+	.cycle > .next-btn{
+		position:absolute;
+		top:50%;
+		z-index:9;
+		margin-top:-30px;
+		width:40px;
+		height:60px;
+		background:#f3f3f3;
+		cursor:pointer;
+		opacity:0.8;
+		/*display:none;*/
+	}
+	.cycle > .prev-btn{
+		left:20px;
+	}
+	.cycle > .next-btn{
+		right:20px;
+	}
+	.cycle > .prev-btn:after,
+	.cycle > .next-btn:after{
+		content:'';
+		display:block;
+		position:absolute;
+		top:50%;
+		left:50%;
+		margin-top:-10px;
+		width:17px;
+		height:17px;
+		border-left:3px solid #333;
+		border-top:3px solid #333;
+	}
+	.cycle > .prev-btn:after{
+		transform:rotate(-45deg);
+		margin-left:-5px;
+	}
+	.cycle > .next-btn:after{
+		transform:rotate(135deg);
+		margin-left:-15px;
+	}
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="gallery.js"></script>
+
+</head>
+<body>
+<div class="cycle" id="gallery">
+	<ul class="list">
+		<li class="current"><img src="images/s1.jpg"></li>
+		<li><img src="images/s2.jpg"></li>
+		<li><img src="images/s3.jpg"></li>
+	</ul>
+</div>
+<div style="text-align:center;">
+<button id="start">start</button>
+<button id="stop">stop</button>
+</div>
+<script type="text/javascript">
+	var galleryPager = $('#gallery').gallery();
+	$("#start").click(function(){
+		galleryPager.on();
+	});
+	$("#stop").click(function(){
+		galleryPager.off();
+	});
+</script>
+</body>
+</html>
